@@ -1,1 +1,1 @@
-# synth
+# web-synthesizer
