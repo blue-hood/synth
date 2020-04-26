@@ -12,16 +12,18 @@
   "author": "Hood <hato6502@gmail.com> (https://github.com/blue-hood)",
   "scripts": {
     "build": "rimraf dist && webpack --config webpack.prod.js",
+    "clang-format": "find -name '*.[ch]' -or -name '*.[ch]pp' | xargs clang-format -i",
+    "cpplint": "cpplint --recursive .",
     "cypress": "rimraf .nyc_output && cypress",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}'",
-    "fix": "yarn eslint --fix && yarn prettier --write",
+    "fix": "yarn clang-format && yarn eslint --fix && yarn prettier --write",
     "generate-disclaimer": "yarn licenses generate-disclaimer --ignore-platform > DISCLAIMER.md",
     "license-checker": "license-checker --excludePackages '' --excludePrivatePackages --onlyAllow 'Apache-2.0;BSD;BSD-2-Clause;BSD-3-Clause;CC0-1.0;CC-BY-3.0;CC-BY-4.0;ISC;MIT;Public Domain;Unlicense' --unknown",
     "prettier": "prettier '**/*.{html,json,md,yml}'",
     "start": "http-server dist",
     "stylelint": "stylelint '**/*.{js,jsx,ts,tsx}'",
-    "test": "tsc --noEmit && yarn eslint && yarn stylelint && yarn prettier --check && yarn license-checker && yarn cypress run"
+    "test": "tsc --noEmit && yarn cpplint && yarn eslint && yarn stylelint && yarn prettier --check && yarn license-checker && yarn cypress run"
   },
   "browserslist": [
     "defaults"

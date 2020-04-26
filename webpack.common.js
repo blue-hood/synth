@@ -19,9 +19,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
   },
-  plugins: [
-    new CopyPlugin([{ from: 'resources' }]),
-  ],
+  plugins: [new CopyPlugin([{ from: 'resources' }])],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
