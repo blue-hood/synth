@@ -12,8 +12,8 @@
   "author": "Hood <hato6502@gmail.com> (https://github.com/blue-hood)",
   "scripts": {
     "build": "rimraf dist && webpack --config webpack.prod.js",
-    "clang-format": "find -name '*.[ch]' -or -name '*.[ch]pp' | xargs clang-format -i",
-    "cpplint": "cpplint --recursive .",
+    "clang-format": "find src -name '*.[ch]' -or -name '*.[ch]pp' | xargs clang-format -i",
+    "cpplint": "cpplint --recursive src",
     "cypress": "rimraf .nyc_output && cypress",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "eslint": "eslint '**/*.{js,jsx,ts,tsx}'",
@@ -30,7 +30,7 @@
   ],
   "dependencies": {
     "@cypress/code-coverage": "^3.5.3",
-    "@material-ui/core": "^4.9.4",
+    "@material-ui/core": "^4.9.12",
     "@sentry/browser": "^5.13.0",
     "copy-webpack-plugin": "^5.1.1",
     "core-js": "3",
@@ -53,6 +53,7 @@
     "@types/styled-components": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "2.x",
     "@typescript-eslint/parser": "2.x",
+    "@wasm-tool/emscripten": "^1.0.0",
     "babel-eslint": "10.x",
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^6.0.0",
@@ -79,7 +80,7 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-prettier": "^1.1.2",
     "stylelint-processor-styled-components": "^1.10.0",
-    "typescript": "^3.7.4",
+    "typescript": "^3.8.3",
     "wait-on": "^4.0.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.3"

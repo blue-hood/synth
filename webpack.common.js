@@ -6,10 +6,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.c(pp)?$/,
+        type: 'javascript/auto',
+        loader: '@wasm-tool/emscripten',
+      },
+      {
         test: /\.[jt]sx?$/,
         loader: 'babel-loader',
       },
     ],
+  },
+  node: {
+    fs: 'empty',
   },
   optimization: {
     splitChunks: {
