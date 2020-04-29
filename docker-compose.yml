@@ -1,12 +1,11 @@
 version: '2'
 services:
   dev:
-    container_name: web-synthesizer-dev
     build: .
+    command: bash
     ports:
       - 8080:8080
-    stdin_open: true
     tty: true
     volumes:
-      - .:/root/web-synthesizer
-    working_dir: /root/web-synthesizer
+      - .:/web-synthesizer
+    working_dir: /web-synthesizer

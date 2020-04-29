@@ -1,14 +1,9 @@
-FROM node:14
-SHELL ["/bin/bash", "-c"]
+FROM trzeci/emscripten
 
-RUN apt-get update
-RUN apt-get install -y clang-format cmake default-jre python2.7 python-pip
-RUN pip install cpplint
-WORKDIR /root
-RUN git clone https://github.com/emscripten-core/emsdk.git
-WORKDIR /root/emsdk
-RUN git pull
-RUN ./emsdk install latest
-RUN ./emsdk activate latest
-
-CMD source /root/emsdk/emsdk_env.sh && bash
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -y clang-format nodejs yarn
+# Override node v14
+ENV PATH="/usr/bin:${PATH}"
+RUN pip3 install cpplint

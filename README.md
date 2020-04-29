@@ -4,25 +4,22 @@
 
 ```
 $ docker-compose up -d
-$ docker attach web-synthesizer-dev
-# yarn
-# yarn dev
+$ docker-compose exec dev yarn
+$ docker-compose exec dev yarn dev
 ```
 
 ## Linting and Formatting
 
 ```
 $ docker-compose up -d
-$ docker attach web-synthesizer-dev
-# yarn
-# yarn fix
+$ docker-compose exec dev yarn
+$ docker-compose exec dev yarn fix
 ```
 
 ## Test
 
 ```
 $ docker-compose up -d
-$ docker attach web-synthesizer-dev
-# yarn
-# yarn test
+$ docker-compose exec dev yarn
+$ docker-compose exec dev yarn test
 ```
