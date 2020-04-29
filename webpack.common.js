@@ -6,7 +6,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.c(pp)?$/,
+        test: /\.cpp$/,
         type: 'javascript/auto',
         loader: '@wasm-tool/emscripten',
       },
