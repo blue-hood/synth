@@ -6,9 +6,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.cpp$/,
-        type: 'javascript/auto',
-        loader: '@wasm-tool/emscripten',
+        test: /\.clist$/,
+        use: [
+          {
+            loader: 'emcc-loader',
+            options: {
+              buildDir: `${__dirname}/dist`,
+              commonFlags: ['-O2'],
+              cFlags: ['-std=c11'],
+              cxxFlags: ['-std=c++14'],
+              ldFlags: [
+                '-s', "EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']",
+                '-s', 'DEMANGLE_SUPPORT=1',
+              ]
+            }
+          }
+        ]
       },
       {
         test: /\.[jt]sx?$/,
