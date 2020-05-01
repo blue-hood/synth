@@ -1,11 +1,11 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
-import test from './test.clist';
+import core from './core';
 
 const main = async () => {
-  const { _test } = await test.initialize();
+  const { _simulate } = await core.initialize();
 
-  document.body.innerHTML = String(_test());
+  document.body.innerHTML = String(_simulate());
 };
 
 main();

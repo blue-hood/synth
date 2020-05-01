@@ -6,9 +6,8 @@
 #define EMSCRIPTEN_KEEPALIVE
 #endif
 
+#include "Component.hpp"
 #include <cstddef>
-
-struct Component;
 
 struct Input {
   Component *component;
@@ -39,53 +38,9 @@ void connectPort(Input *input, Output *output) {
   output->input = input;
 }
 
-#define COMPONENT_INPUTS_LENGTH 16
-
-enum ComponentType { Mixer };
-
-struct Component {
-  // TODO: allocate +1 for end of inputs
-  Input inputs[COMPONENT_INPUTS_LENGTH];
-  Output output;
-  ComponentType type;
-};
-
-Component *initComponent(Component *component, ComponentType type) {
-  int index;
-
-  component->type = type;
-
-  for (index = 0; index < COMPONENT_INPUTS_LENGTH; index++) {
-    initInput(&component->inputs[index], component);
-  }
-
-  return component;
-}
-
-double mixerSynchronizer(Input inputs[COMPONENT_INPUTS_LENGTH]) {
-  Input **input;
-  double value = 0.0;
-
-  for (input = &inputs; *input != nullptr; input++) {
-    value += *(*input)->value;
-  }
-
-  return value;
-}
-
-double (*const synchronizer[])(Input[COMPONENT_INPUTS_LENGTH]) = {
-    mixerSynchronizer};
-
-// TODO: inline
-Component *syncComponent(Component *component) {
-  component->output.value = synchronizer[component->type](component->inputs);
-
-  return component;
-}
-
 extern "C" {
 EMSCRIPTEN_KEEPALIVE
-double test() {
+double simulate() {
   Component component1, component2;
   Output output;
 
