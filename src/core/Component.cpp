@@ -5,30 +5,30 @@ Component *initComponent(Component *component, ComponentType type) {
 
   component->type = type;
 
-  for (index = 0; index < COMPONENT_INPUTS_LENGTH; index++) {
-    initInput(&component->inputs[index], component);
+  for (index = 0; index < COMPONENT_IN_PORTS_LENGTH; index++) {
+    initInput(&component->inPorts[index], component);
   }
 
   return component;
 }
 
-double mixerSynchronizer(Input inputs[COMPONENT_INPUTS_LENGTH]) {
-  Input **input;
+double mixerSynchronizer(InPort inPorts[COMPONENT_IN_PORTS_LENGTH]) {
+  InPort **inPort;
   double value = 0.0;
 
-  for (input = &inputs; *input != nullptr; input++) {
-    value += *(*input)->value;
+  for (inPort = &inPorts; *inPort != nullptr; inPort++) {
+    value += *(*inPort)->value;
   }
 
   return value;
 }
 
-double (*const synchronizer[])(Input[COMPONENT_INPUTS_LENGTH]) = {
+double (*const synchronizer[])(InPort[COMPONENT_IN_PORTS_LENGTH]) = {
     mixerSynchronizer};
 
 // TODO: inline
 Component *syncComponent(Component *component) {
-  component->output.value = synchronizer[component->type](component->inputs);
+  component->outPort.value = synchronizer[component->type](component->inPorts);
 
   return component;
 }

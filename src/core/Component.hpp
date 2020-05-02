@@ -1,14 +1,19 @@
-#define COMPONENT_INPUTS_LENGTH 16
+#pragma once
+
+#include "InPort.hpp"
+#include "OutPort.hpp"
+
+#define COMPONENT_IN_PORTS_LENGTH 16
 
 enum ComponentType { Mixer };
 
 struct Component {
   // TODO: allocate +1 for end of inputs
-  Input inputs[COMPONENT_INPUTS_LENGTH];
-  Output output;
+  InPort inPorts[COMPONENT_IN_PORTS_LENGTH];
+  OutPort outPort;
   ComponentType type;
 };
 
 Component *initComponent(Component *, ComponentType);
-double mixerSynchronizer(Input[COMPONENT_INPUTS_LENGTH]);
+double mixerSynchronizer(InPort[COMPONENT_IN_PORTS_LENGTH]);
 Component *syncComponent(Component *);
